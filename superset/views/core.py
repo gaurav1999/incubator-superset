@@ -824,10 +824,10 @@ class Superset(BaseSupersetView):
             return redirect(datasource.default_endpoint)
 
         # slc perms
-        slice_add_perm = security_manager.can_access("can_add", "SliceModelView")
+        slice_add_perm = security_manager.can_access("can_write", "Chart")
         slice_overwrite_perm = is_owner(slc, g.user)
         slice_download_perm = security_manager.can_access(
-            "can_download", "SliceModelView"
+            "can_read", "Chart"
         )
 
         form_data["datasource"] = str(datasource_id) + "__" + datasource_type
@@ -998,7 +998,7 @@ class Superset(BaseSupersetView):
             )
         elif request.args.get("add_to_dash") == "new":
             # check create dashboard permissions
-            dash_add_perm = security_manager.can_access("can_add", "DashboardModelView")
+            dash_add_perm = security_manager.can_access("can_write", "Dashboard")
             if not dash_add_perm:
                 return json_error_response(
                     _("You don't have the rights to ")
@@ -2810,6 +2810,8 @@ class Superset(BaseSupersetView):
 class CssTemplateModelView(SupersetModelView, DeleteMixin):
     datamodel = SQLAInterface(models.CssTemplate)
     include_route_methods = RouteMethod.CRUD_SET
+
+    class_permission_name = "CssTemplate"
 
     list_title = _("CSS Templates")
     show_title = _("Show CSS Template")

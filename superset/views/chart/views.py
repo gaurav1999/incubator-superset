@@ -33,6 +33,7 @@ class SliceModelView(
     SliceMixin, SupersetModelView, DeleteMixin
 ):  # pylint: disable=too-many-ancestors
     route_base = "/chart"
+    class_permission_name = "Chart"
     datamodel = SQLAInterface(Slice)
     include_route_methods = RouteMethod.CRUD_SET | {
         RouteMethod.DOWNLOAD,
@@ -76,6 +77,8 @@ class SliceModelView(
 class SliceAsync(SliceModelView):  # pylint: disable=too-many-ancestors
     route_base = "/sliceasync"
     include_route_methods = {RouteMethod.API_READ}
+
+    class_permission_name = "Chart"
 
     list_columns = [
         "changed_on",

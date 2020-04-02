@@ -46,6 +46,9 @@ class AnnotationModelView(
     SupersetModelView, DeleteMixin
 ):  # pylint: disable=too-many-ancestors
     datamodel = SQLAInterface(Annotation)
+
+    class_permission_name = "Annotation"
+
     include_route_methods = RouteMethod.CRUD_SET
 
     list_title = _("List Annotation")
@@ -95,6 +98,9 @@ class AnnotationLayerModelView(
     SupersetModelView, DeleteMixin
 ):  # pylint: disable=too-many-ancestors
     datamodel = SQLAInterface(AnnotationLayer)
+
+    class_permission_name = "Annotation"
+
     include_route_methods = RouteMethod.CRUD_SET
 
     list_title = _("List Annotation Layer")

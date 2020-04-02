@@ -47,6 +47,9 @@ class EmailScheduleView(
     SupersetModelView, DeleteMixin
 ):  # pylint: disable=too-many-ancestors
     include_route_methods = RouteMethod.CRUD_SET
+
+    class_permission_name = "ScheduleEmail"
+
     _extra_data = {"test_email": False, "test_email_recipients": None}
     schedule_type: Optional[str] = None
     schedule_type_model: Optional[Type] = None

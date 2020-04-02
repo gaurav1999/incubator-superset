@@ -28,6 +28,9 @@ from superset.views.database.filters import DatabaseFilter
 
 
 class DatabaseMixin:
+
+    class__permission_name = "Database"
+
     list_title = _("Databases")
     show_title = _("Show Database")
     add_title = _("Add Database")
